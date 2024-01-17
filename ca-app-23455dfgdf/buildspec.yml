@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - npm install
+  pre_build:
+    commands:
+      - export OPENSSL_CONF=/dev/null
+      - npm test
+      - rm -rf node_modules
+  build:
+    commands:
+      - npm install --production 
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
